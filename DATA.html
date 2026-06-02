@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dataset Access Instructions</title>
+<style>
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #666;
+  --accent: #2563eb;
+  --accent-soft: #dbeafe;
+  --border: #e5e7eb;
+  --code-bg: #f3f4f6;
+  --code-fg: #111;
+  --table-stripe: #f9fafb;
+  --table-head: #f3f4f6;
+  --quote-border: #d1d5db;
+  --delta-plus: #16a34a;
+  --delta-minus: #dc2626;
+  --sidebar-bg: #fafafa;
+  --shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+[data-theme="dark"] {
+  --bg: #0f1419;
+  --fg: #e6e6e6;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --accent-soft: #1f3a5f;
+  --border: #30363d;
+  --code-bg: #161b22;
+  --code-fg: #d4d4d4;
+  --table-stripe: #161b22;
+  --table-head: #21262d;
+  --quote-border: #3b4148;
+  --delta-plus: #4ade80;
+  --delta-minus: #f87171;
+  --sidebar-bg: #0d1117;
+  --shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.65;
+  font-size: 15px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+aside.sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+  font-size: 13px;
+}
+aside.sidebar h2 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+aside.sidebar ol { list-style: none; padding: 0; margin: 0; }
+aside.sidebar li { margin: 2px 0; }
+aside.sidebar li.toc-2 { padding-left: 12px; }
+aside.sidebar li.toc-3 { padding-left: 24px; font-size: 12px; color: var(--muted); }
+aside.sidebar a {
+  color: var(--fg);
+  text-decoration: none;
+  display: block;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+aside.sidebar a:hover { background: var(--accent-soft); color: var(--accent); }
+aside.sidebar a.active { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+
+main {
+  padding: 2rem 3rem 6rem;
+  max-width: 980px;
+  margin: 0 auto;
+  width: 100%;
+}
+header.doc-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+.badges { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 0.5rem; }
+.badge {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.actions { display: flex; gap: 8px; margin-top: 0.75rem; }
+.btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+h1, h2, h3, h4, h5, h6 { line-height: 1.3; margin: 1.6em 0 0.6em; font-weight: 600; }
+h1 { font-size: 1.9rem; margin-top: 0; }
+h2 { font-size: 1.4rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+h3 { font-size: 1.15rem; }
+h4 { font-size: 1rem; color: var(--muted); }
+h1 .anchor, h2 .anchor, h3 .anchor, h4 .anchor, h5 .anchor, h6 .anchor {
+  opacity: 0; margin-left: 0.4em; color: var(--muted); text-decoration: none; font-weight: 400;
+  transition: opacity 0.15s;
+}
+h1:hover .anchor, h2:hover .anchor, h3:hover .anchor,
+h4:hover .anchor, h5:hover .anchor, h6:hover .anchor { opacity: 1; }
+
+p { margin: 0.7em 0; }
+a { color: var(--accent); }
+a:hover { text-decoration: underline; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+del { text-decoration: line-through; color: var(--muted); }
+hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+
+ul, ol { padding-left: 1.6em; margin: 0.6em 0; }
+li { margin: 0.2em 0; }
+li.task { list-style: none; margin-left: -1.4em; }
+li.task input { margin-right: 0.4em; }
+
+code {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.88em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.85em 1em;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; border-radius: 0; font-size: inherit; }
+
+blockquote {
+  border-left: 3px solid var(--quote-border);
+  margin: 1em 0;
+  padding: 0.2em 1em;
+  color: var(--muted);
+}
+
+.table-wrap { overflow-x: auto; margin: 1em 0; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+thead th {
+  position: sticky;
+  top: 0;
+  background: var(--table-head);
+  border-bottom: 2px solid var(--border);
+  padding: 8px 10px;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+tbody tr:nth-child(even) { background: var(--table-stripe); }
+tbody tr:hover { background: var(--accent-soft); }
+td, th { padding: 7px 10px; border-bottom: 1px solid var(--border); }
+
+.delta-plus { color: var(--delta-plus); font-weight: 600; }
+.delta-minus { color: var(--delta-minus); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  aside.sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+  main { padding: 1.5rem 1.2rem 4rem; }
+}
+</style>
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar"><h2>Contents</h2><ol>
+<li class="toc-1"><a href="#dataset-access-instructions">Dataset Access Instructions</a></li>
+<li class="toc-2"><a href="#expected-layout">Expected layout</a></li>
+<li class="toc-2"><a href="#mimic-iii">1. MIMIC-III (ICU monitoring)</a></li>
+<li class="toc-2"><a href="#physionet">2. PhysioNet Challenge 2015 (Arrhythmia Alarms)</a></li>
+<li class="toc-2"><a href="#yahoo-s5">3. Yahoo S5 (Web Service Metrics)</a></li>
+</ol></aside>
+<main>
+<header class="doc-header">
+  <h1 id="dataset-access-instructions">Dataset Access Instructions<a class="anchor" href="#dataset-access-instructions">¶</a></h1>
+  <div class="actions">
+    <button class="btn" id="theme-toggle" title="toggle light/dark">◐ theme</button>
+  </div>
+</header>
+
+<p>CALM-TS is evaluated on three benchmarks, each requiring external access. This document covers the credentialing / licensing requirements and points to the loaders in <code>experiments/lib/data_loaders.py</code>.</p>
+
+<h2 id="expected-layout">Expected layout<a class="anchor" href="#expected-layout">¶</a></h2>
+
+<p>Set via <code>CALM_TS_DATA</code> env var, defaults to <code>~/.calm_ts_data/</code>:</p>
+
+<pre><code>$CALM_TS_DATA/
+├── mimic/
+│   ├── windows.npy     # (12847, T, C) float32, T=60 @ 1Hz, C=8 vital signs
+│   ├── labels.npy      # (12847,) int32, 8 event categories
+│   └── split.json      # {"gold": [...], "unlabeled": [...], "test": [...]}
+├── physionet/
+│   ├── windows.npy        # (7875, T, C), T=7500 @ 250Hz, C=5 channels
+│   ├── labels.npy         # (7875,) int32, 5 alarm types (legacy 5-class)
+│   ├── labels_binary.npy  # (7875,) int32, true/false alarm (camera-ready)
+│   └── split.json
+└── yahoo/
+    ├── windows.npy     # (15621, T, C), T=3600s windows, C=1
+    ├── labels.npy      # (15621,) int32, binary anomaly labels
+    └── split.json
+</code></pre>
+
+<h2 id="mimic-iii">1. MIMIC-III (ICU monitoring)<a class="anchor" href="#mimic-iii">¶</a></h2>
+
+<p><strong>Source:</strong> PhysioNet — <a href="https://physionet.org/content/mimiciii/1.4/">https://physionet.org/content/mimiciii/1.4/</a></p>
+
+<p><strong>Access requirements:</strong></p>
+<ol>
+<li>Complete CITI "Data or Specimens Only Research" training (<a href="https://about.citiprogram.org/">about.citiprogram.org</a>) — ~4 hours</li>
+<li>Sign the PhysioNet Credentialed Health Data Use Agreement</li>
+<li>Apply for MIMIC-III access; approval typically 1–2 weeks</li>
+</ol>
+
+<p><strong>Preprocessing:</strong> <code>experiments/preprocess_mimic.py</code> consumes a flat parquet/csv export of CHARTEVENTS + diagnosis categories:</p>
+
+<pre><code>python experiments/preprocess_mimic.py \
+       --input  $CALM_TS_RAW/mimic \
+       --output $CALM_TS_DATA/mimic \
+       --format parquet
+</code></pre>
+
+<p>Expected <code>$CALM_TS_RAW/mimic/</code>:</p>
+<ul>
+<li><code>charts.parquet</code> — columns <code>stay_id, charttime (sec offset), HR, SpO2, SBP, DBP, MAP, RR, Temp, GCS</code></li>
+<li><code>diagnoses.parquet</code> — columns <code>stay_id, icd_category</code> (one of the 8 categories)</li>
+</ul>
+
+<p>The upstream extraction (CHARTEVENTS + LABEVENTS + D_ICD_DIAGNOSES → these two parquet files) is project-specific and not redistributable; it must be done locally on the credentialed MIMIC-III source per license. The script then:</p>
+
+<ul>
+<li>Slides 60-second non-overlapping windows over each ICU stay's charts</li>
+<li>Aggregates each minute's per-channel mean (handles upstream sampling &gt; 1 Hz)</li>
+<li>Carries forward missing minutes within a window after the &lt; 10% missingness gate</li>
+<li>Retains windows whose stay matches one of the 8 diagnosis categories (<code>normal, cardiac_arrhythmia, sepsis_onset, hemodynamic_instability, respiratory_failure, neurological_event, infection, other</code>)</li>
+<li>Paper target: ≈12,847 windows</li>
+</ul>
+
+<p><strong>License constraints:</strong> Redistribution prohibited. The <code>windows.npy</code> file must be regenerated locally from the approved MIMIC-III source.</p>
+
+<h2 id="physionet">2. PhysioNet Challenge 2015 (Arrhythmia Alarms)<a class="anchor" href="#physionet">¶</a></h2>
+
+<p><strong>Source:</strong> <a href="https://physionet.org/content/challenge-2015/1.0.0/">https://physionet.org/content/challenge-2015/1.0.0/</a></p>
+
+<p><strong>Access requirements:</strong> Subject to PhysioNet's Open Data License. As of 2026 PhysioNet enforces HTTP-Basic auth for bulk recursive downloads even on open datasets — log into your free PhysioNet account and pass the credentials to <code>wget</code>.</p>
+
+<p><strong>Preprocessing:</strong> <code>experiments/preprocess_physionet.py</code> requires <code>wfdb</code> (<code>pip install wfdb</code>):</p>
+
+<pre><code># 1. Download (replace USER with your physionet.org login)
+wget -r -N -c -np --user=USER --ask-password \
+     https://physionet.org/files/challenge-2015/1.0.0/
+
+# 2. Run preprocess
+python experiments/preprocess_physionet.py \
+       --input  physionet.org/files/challenge-2015/1.0.0 \
+       --output $CALM_TS_DATA/physionet
+</code></pre>
+
+<p>Behaviour:</p>
+<ul>
+<li>Walks all <code>.hea/.mat</code> records under <code>--input</code></li>
+<li>Resamples ECG_I, ECG_II, ABP, PPG, RESP to 250 Hz (linear interp; sufficient for downstream temporal-summary statistics)</li>
+<li>Cuts each record into a single 30 s window centred on the alarm onset; the 5-class label (<code>labels.npy</code>) is the first letter of the record id (<code>a→asystole, b→bradycardia, c→tachycardia, d→vtach, e/f→vfib/vflutter</code>); the binary label (<code>labels_binary.npy</code>, used in the camera-ready paper) is the Challenge ground-truth verification flag (true vs. false alarm)</li>
+<li>Missing channels are zero-filled (downstream stats handle constant arrays)</li>
+<li>Camera-ready target: ≈7,875 windows; class balance for binary is 60.9% false / 39.1% true</li>
+</ul>
+
+<p><strong>Note (camera-ready task switch).</strong> The KDD'26 camera-ready PhysioNet column uses the <em>official Challenge 2015 binary alarm-verification task</em> rather than the review-version 5-class alarm-type formulation. Both label files are produced by the same preprocessor in one pass; the binary task is the one cited in Table 1 of the paper. Per-seed run artefacts under <code>results/runs/seed{0..4}/</code> and the 5-seed aggregate under <code>results/runs/seeds0_1_2_3_4/</code> all operate on <code>labels_binary.npy</code>. The legacy 5-class runs <code>results/runs/multi5class/</code> and <code>results/runs/multi5class_clinical/</code> consume <code>labels.npy</code>.</p>
+
+<h2 id="yahoo-s5">3. Yahoo S5 (Web Service Metrics)<a class="anchor" href="#yahoo-s5">¶</a></h2>
+
+<p><strong>Original distribution:</strong> Yahoo Webscope — <a href="https://webscope.sandbox.yahoo.com/catalog.php?datatype=s&did=70">webscope.sandbox.yahoo.com/catalog.php?datatype=s&amp;did=70</a></p>
+
+<p><strong>Mirror used for this work:</strong> Aliyun Tianchi public mirror — <a href="https://tianchi.aliyun.com/dataset/88734">tianchi.aliyun.com/dataset/88734</a> — chosen because Webscope DSA approval lead time exceeded our camera-ready timeline. The Tianchi archive is bit-equivalent to the Webscope distribution (A1/A2/A3/A4 sub-benchmarks). For canonical re-distribution and license terms, refer to the Yahoo Webscope link above.</p>
+
+<p><strong>Access requirements (original Webscope path):</strong></p>
+<ol>
+<li>Create a Yahoo Labs Webscope account (free, academic only)</li>
+<li>Accept the dataset-specific Data Sharing Agreement</li>
+<li>Download S5 (includes A1/A2/A3/A4 sub-benchmarks); 1.3 GB archive</li>
+</ol>
+
+<p><strong>Preprocessing:</strong> <code>experiments/preprocess_yahoo.py</code>:</p>
+
+<pre><code>python experiments/preprocess_yahoo.py \
+       --input  $CALM_TS_RAW/ydata-labeled-time-series-anomalies-v1_0 \
+       --output $CALM_TS_DATA/yahoo
+</code></pre>
+
+<p>Expected <code>--input</code> layout (post-extraction): a directory tree containing the <code>A1Benchmark/</code>, <code>A2Benchmark/</code>, <code>A3Benchmark/</code>, <code>A4Benchmark/</code> folders with their per-series CSVs. The script:</p>
+
+<ul>
+<li>Reads every CSV, tolerating both <code>is_anomaly</code> / <code>anomaly</code> column variants</li>
+<li>Concatenates per file, slices into non-overlapping 3600-step windows</li>
+<li>Labels a window anomaly (1) if any flag inside is positive, else normal (0)</li>
+<li>Paper target: ≈15,621 windows</li>
+</ul>
+
+<p><strong>License constraints:</strong> Academic-only redistribution prohibited.</p>
+
+</main>
+</div>
+</body>
+</html>
+

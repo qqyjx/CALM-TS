@@ -1,0 +1,109 @@
+# LaTeX build files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+
+# Paper LaTeX sources, figures, and compiled PDFs are kept out of this repo
+# (internal-review = code only). LaTeX source lives in a separate location.
+paper/
+
+# Camera-ready admin docs (Decision notification, Proceedings instructions)
+# are kept locally for the corresponding author and not shipped via this repo.
+camera-ready/
+
+# Editor files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+.eggs/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+env/
+.env
+.env.local
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Results (uncomment if you want to ignore results)
+# results/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Large dataset artifacts — too big for GitHub, see DATA.md for reproduction.
+# Hashes recorded in results/physionet_artifacts.sha256.
+windows.npy
+*/windows.npy
+**/windows.npy
+
+# Raw downloads (300+ MB zips, 800+ unzipped record files)
+**/training/
+*.zip
+*.tar.gz
+
+# Verbose per-run logs at logs/ root; the curated audit trail under
+# logs/audit_trail/ is committed.
+logs/curl_phys2015.log
+logs/preprocess_physionet.log
+logs/data_loaders_verify.log
+logs/wget_phys2015.log
+
+# Per-run raw LLM traces (100s of MB each) — keep on disk for auditing but don't ship
+results/runs/*/raw_trace.jsonl
+
+
+# Serena MCP plugin local project state (IDE tool, not project artefact)
+.serena/
+
+# Internal review notes (organizational QC; not for external sharing)
+review/
+
+# OpenReview reviewer comments + rebuttal drafts (sensitive: keep local only,
+# used as reference for camera-ready edits but not for public release)
+openreview/
+
+# demo/ removed at user request (was empty scaffold)
+demo/
+
+# Dev-only sync/scrub helper scripts (not for publication repo)
+.sync_intermediates*.sh
+.scrub_trace_timestamps.py
+
+
+# LLM-call cache produced by experiments/analysis/prefill_llm_cache.py
+# (regenerable from results/runs/seed*/raw_trace.jsonl.gz; not source)
+results/runs/llm_cache.jsonl.gz
