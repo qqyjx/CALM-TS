@@ -1,5 +1,7 @@
 # CALM-TS: Risk-Controlled LLM Labeling for Time-Series via Calibrated Selective Gating
 
+**投稿**：KDD 2026 · 已录用 · [DOI](https://doi.org/10.1145/3770855.3817859) · 投稿页链接未存档
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20506015.svg)](https://doi.org/10.5281/zenodo.20506015)
 
 > **What this repository contains.** This public repository hosts the **CALM-TS framework source** (`experiments/lib/`), the data-preprocessing scripts, and a small **CPU demo**. The complete artifact — all experiment runners, the figure-generation pipeline, the per-seed run artefacts (10 methods × 5 seeds), and the LLM prompt–response audit logs — is archived in the **Zenodo deposit ([10.5281/zenodo.20506015](https://doi.org/10.5281/zenodo.20506015))** cited in the paper. Use the Zenodo deposit to reproduce the paper's tables and figures.
