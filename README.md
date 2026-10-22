@@ -100,9 +100,29 @@ artefacts (`cells/`, `manifest.json`, `raw_trace.jsonl.gz` audit logs), and the
 figure-generation pipeline are in the Zenodo deposit
 ([10.5281/zenodo.20506015](https://doi.org/10.5281/zenodo.20506015)).
 
-## Citing
+## Citation
 
+If you use this code, please cite the paper:
+
+```bibtex
+@inproceedings{xiao2026calm,
+  title = {CALM-TS: Risk-Controlled LLM Labeling for Time-Series via Calibrated Selective Gating},
+  url = {http://dx.doi.org/10.1145/3770855.3817859},
+  DOI = {10.1145/3770855.3817859},
+  booktitle = {Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2},
+  publisher = {ACM},
+  author = {Xiao, Yifan and Li, Shijie and Huang, Yu},
+  year = {2026},
+  month = Aug,
+  pages = {5674–5685},
+}
 ```
+
+### Artifact
+
+The full experiment artifact is archived on Zenodo:
+
+```bibtex
 @software{calm_ts_2026,
   title  = {CALM-TS: Risk-Controlled LLM Labeling for Time-Series via Calibrated Selective Gating},
   year   = {2026},
