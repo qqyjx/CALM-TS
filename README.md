@@ -114,7 +114,7 @@ If you use this code, please cite the paper:
   author = {Xiao, Yifan and Li, Shijie and Huang, Yu},
   year = {2026},
   month = Aug,
-  pages = {5674–5685},
+  pages = {5674--5685},
 }
 ```
 
