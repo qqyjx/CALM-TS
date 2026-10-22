@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "CALM-TS: Risk-Controlled LLM Labeling for Time-Series via Calibrated Selective Gating"
+authors:
+  - family-names: "Xiao"
+    given-names: "Yifan"
+    orcid: "https://orcid.org/0009-0004-6447-3242"
+  - family-names: "Li"
+    given-names: "Shijie"
+    orcid: "https://orcid.org/0009-0002-5644-4527"
+  - family-names: "Huang"
+    given-names: "Yu"
+    orcid: "https://orcid.org/0000-0002-1138-1828"
+doi: "10.1145/3770855.3817859"
+repository-code: "https://github.com/qqyjx/CALM-TS"
+license: MIT
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.20506015"
+    description: "Zenodo archive of the full experiment artifact"
+preferred-citation:
+  type: conference-paper
+  title: "CALM-TS: Risk-Controlled LLM Labeling for Time-Series via Calibrated Selective Gating"
+  authors:
+    - family-names: "Xiao"
+      given-names: "Yifan"
+      orcid: "https://orcid.org/0009-0004-6447-3242"
+    - family-names: "Li"
+      given-names: "Shijie"
+      orcid: "https://orcid.org/0009-0002-5644-4527"
+    - family-names: "Huang"
+      given-names: "Yu"
+      orcid: "https://orcid.org/0000-0002-1138-1828"
+  doi: "10.1145/3770855.3817859"
+  collection-title: "Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2"
+  conference:
+    name: "KDD '26: The 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining"
+    location: "Jeju Island Republic of Korea"
+  publisher:
+    name: "ACM"
+  start: 5674
+  end: 5685
+  year: 2026
+  month: 8
